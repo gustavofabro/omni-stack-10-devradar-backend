@@ -11,7 +11,7 @@ module.exports = {
   
   async destroy(req, res) {
     const { id } = req.params
-    console.log(id)
+
     const devs = await Dev.findByIdAndDelete(id)
 
     return res.json(devs)
@@ -24,9 +24,8 @@ module.exports = {
 
     if (!dev) {
       const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`)
-
       const { name = login, avatar_url, bio } = apiResponse.data
-
+      
       const location = {
         type: 'Point',
         coordinates: [longitude, latitude]
